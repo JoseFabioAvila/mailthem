@@ -31,12 +31,12 @@ angular.module('mailthemApp.login',['ngRoute','firebase'])
             $scope.errMsg = true;
             $scope.errorMessage = error.message;
         });   
-    }
+    };
     
     
-}])
+}]);
 
-.service('CommonProp', ['$location', '$firebaseAuth', function($location, $firebaseAuth){
+/*.service('CommonProp', ['$location', '$firebaseAuth', function($location, $firebaseAuth){
     var user = "";
     var auth = $firebaseAuth();
     
@@ -59,7 +59,7 @@ angular.module('mailthemApp.login',['ngRoute','firebase'])
             $location.path('/login');
         }
     };
-}]);
+}]);*/
 
 
 

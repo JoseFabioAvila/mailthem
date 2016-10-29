@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MailthemApp</title>
+</head>
+<body ng-controller='SendTemplateCtrl'>
+
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a href="#/dashboard" class="navbar-brand">Mailthem</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a href="#/dashboard">Home</a></li>
+            <li><a href="#/add_template">Add Template</a></li>
+            <li><a href="#">Logout</a></li>
+        </ul>
+    </div>
+</nav>
+    
+<div class="container" ng-show="success">
+    <div class="row">
+        <div class="alert alert-success">
+            <strong>Success!</strong> The template has been added.
+        </div>
+    </div>
+</div>
+    
+<div class="container">
+    <form role="form" name="templateForm" ng-submit="createTemplate()" novalidate="">
+        <legend>Send Template</legend>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <h4 for="title">Template From: {{username}}</h4>
+                </div>
+                <div class="form-group" ng-class="{'has-error': templateForm.title.$invalid && templateForm.title.$touched}">
+                    <label for="title">Template Title</label>
+                    <input type="text" name="title" class="form-control" placeholder="Title" ng-model="templateTitle" required="" ng-minlength = 2>
+                    <small class="help-block" ng-show="templateForm.title.$error.minlength && templateForm.title.$touched">Please enter a valid title for Template.</small>
+                </div>
+                <div class="form-group" ng-class="{'has-error': templateForm.toList.$invalid && templateForm.toList.$touched}">
+                    <label for="toList">Template Recipients</label>
+                    <textarea name="toList" class="form-control" placeholder="{{recipientsString}}" ng-model="recipientsTemplate" ng-minlength = 5 disabled>
+                        
+                    </textarea>
+                    <button type="button" class="btn btn-primary btn-lg btn-block" data-target="#addRecipientsModal" data-toggle="modal">Add Recipients</button>
+                    <button type="button" class="btn btn-sm btn-primary btn-lg btn-block" >Add Recipients from CSV</button>
+                    <small class="help-block" ng-show="templateForm.title.$error.minlength && templateForm.title.$touched">Please enter a valid title for Template.</small>
+                </div>
+                <div class="form-group"  ng-class="{'has-error': templateForm.content.$invalid && templateForm.content.$touched}">
+                    <label for="content">Template Content</label>
+                    <textarea name="content" class="form-control" placeholder="Content" ng-model="templateContent" required="" ng-minlength = 2></textarea>
+                    <small class="help-block" ng-show="templateForm.content.$error.minlength && templateForm.content.$touched">Please enter a valid Content.</small>
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-primary" ng-disabled="templateForm.$invalid">Save</button>
+                    <button type="submit" class="btn btn-sm btn-success" ng-disabled="templateForm.$invalid">Send</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+    
+<div class="container">
+    <div id="addRecipientsModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    Add Recipients
+                </div>
+                <div class="modal-body">
+                    <form role="form" name="emailForm" novalidate="">
+                        <div class="form-group" ng-class="{'has-error': emailForm.email.$invalid && emailForm.email.$touched}">
+                            <input type="email" name="email" class="form-control" placeholder="Recipient email" ng-model="recipient">
+                            <small class="help-block" ng-show="emailForm.email.$invalid && emailForm.email.$touched">Please enter an Email Address</small>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-success" ng-click="addRecipient()">Add</button>
+                    <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+</body>
+</html>
