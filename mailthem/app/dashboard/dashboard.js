@@ -57,13 +57,7 @@ angular.module('mailthemApp.dashboard', ['ngRoute', 'firebase'])
         var ref = firebase.database().ref().child('templates/'+id);
         $scope.data = $firebaseObject(ref);
         
-        TemplateService.setTitle($scope.data.title);
-        TemplateService.setDescription($scope.data.description);
-        TemplateService.setContent($scope.data.content);
-        
-        console.log(TemplateService.getTitle());
-        console.log(TemplateService.getDescription());
-        console.log(TemplateService.getContent());
+        TemplateService.setTemplateId(id);
         
         $location.path('/send');
     }

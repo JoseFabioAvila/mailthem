@@ -2,44 +2,18 @@
 
 angular.module('mailthemApp')
 .service('TemplateService', function(){
-    var title = "";
-    var description = "";
-    var content = "";
+    var id = "";
     
     return {
-        getTitle: function(){
-            if(title == ""){
-                title = localStorage.getItem("sTitle");
+        getTemplateId: function(){
+            if(id == ""){
+                id = localStorage.getItem("id");
             }
-            return title;
+            return id;
         },
-        setTitle: function(value){
-            localStorage.setItem("sTitle",value);
-            title = value;
-        },
-        
-        
-        getDescription: function(){
-            if(description == ""){
-                description = localStorage.getItem("sDescription");
-            }
-            return description;
-        },
-        setDescription: function(value){
-            localStorage.setItem("sDescription",value);
-            description = value;
-        },
-        
-        
-        getContent: function(){
-            if(content == ""){
-                content = localStorage.getItem("sContent");
-            }
-            return content;
-        },
-        setContent: function(value){
-            localStorage.setItem("sContent",value);
-            content = value;
+        setTemplateId: function(value){
+            localStorage.setItem("id",value);
+            id = value;
         }
     };
 });

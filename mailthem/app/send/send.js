@@ -9,16 +9,23 @@ angular.module('mailthemApp.sendTemplate', ['ngRoute'])
     });
 }])
 
-.controller('SendTemplateCtrl', ['$scope', '$location', 'CommonProp', 'TemplateService', function($scope, $location, CommonProp, TemplateService){
+.controller('SendTemplateCtrl', ['$scope', '$location', 'CommonProp', 'TemplateService', '$firebaseArray', '$firebaseObject', function($scope, $location, CommonProp, TemplateService, $firebaseArray, $firebaseObject){
     $scope.username = CommonProp.getUser();
     
     $scope.recipients = [];
     $scope.recipient ="";
     $scope.recipientsString = "";
     
-    $scope.templateTitle = TemplateService.getTitle();
-    $scope.templateDescription = TemplateService.getDescription();
-    $scope.templateContent = TemplateService.getContent();
+    var id = TemplateService.getTemplateId();
+    var ref = firebase.database().ref().child('templates/'+id);
+    $scope.data = $firebaseObject(ref);
+    
+    
+    console.log($scope.data);
+    
+    /*$scope.templateTitle = $scope.data.title;
+    $scope.templateDescription = $scope.data.description;
+    $scope.templateContent = $scope.data.content;*/
     
     if(!$scope.username){
         $location.path('/login');
