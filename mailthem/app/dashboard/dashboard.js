@@ -16,8 +16,15 @@ angular.module('mailthemApp.dashboard', ['ngRoute', 'firebase'])
         $location.path('/login');
     }
     
+    
     var ref = firebase.database().ref().child('templates');
     $scope.templates = $firebaseArray(ref);
+    /*console.log($scope.templates);
+    
+    var obj = $firebaseObject(ref);
+    obj.$loaded().then(function(data){
+         console.log(data);
+    });*/
     
     $scope.editTemplate = function(id){
         var ref = firebase.database().ref().child('templates/'+id);
@@ -58,6 +65,7 @@ angular.module('mailthemApp.dashboard', ['ngRoute', 'firebase'])
         $scope.data = $firebaseObject(ref);
         
         TemplateService.setTemplateId(id);
+        
         
         $location.path('/send');
     }

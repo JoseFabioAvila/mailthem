@@ -22,15 +22,17 @@
     <div class="row">
         <div class="col-md-12">
             <h3>Welcome Home {{username}} !</h3>
+            <input ng-model="username" ng-hide="true">
         </div>
     </div>
 </div>
 
 <div class="container">
-    <div class="row" ng-repeat="template in templates">
+    <div class="row" ng-repeat="template in templates | filter: username">
         <div class="col-md-12 well well-sm">
             <h4>{{template.title}}</h4>
             <p>{{template.description}}</p>
+            <p>{{tempalte.email}}</p>
             <button type="submit" class="btn btn-sm btn-success" ng-click="sendTemplate(template.$id)">Send</button>
             <button type="submit" class="btn btn-sm btn-primary" ng-click="editTemplate(template.$id)" data-target="#editModal" data-toggle="modal">Edit</button>
             <button type="submit" class="btn btn-sm btn-danger"  ng-click="deleteTemplate(template)" data-target="#deleteModal" data-toggle="modal">Delete</button>

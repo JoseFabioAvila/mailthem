@@ -20,13 +20,6 @@ angular.module('mailthemApp.sendTemplate', ['ngRoute'])
     var ref = firebase.database().ref().child('templates/'+id);
     $scope.data = $firebaseObject(ref);
     
-    
-    console.log($scope.data);
-    
-    /*$scope.templateTitle = $scope.data.title;
-    $scope.templateDescription = $scope.data.description;
-    $scope.templateContent = $scope.data.content;*/
-    
     if(!$scope.username){
         $location.path('/login');
     }
@@ -37,6 +30,10 @@ angular.module('mailthemApp.sendTemplate', ['ngRoute'])
         $scope.recipientsString = $scope.recipients.toString();
         
         console.log($scope.recipientsString);
+    };
+    
+    $scope.sendEmail =function(){
+        $location.path('/dashboard');
     };
     
 }]);
