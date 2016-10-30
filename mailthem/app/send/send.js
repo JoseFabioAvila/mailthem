@@ -9,7 +9,7 @@ angular.module('mailthemApp.sendTemplate', ['ngRoute'])
     });
 }])
 
-.controller('SendTemplateCtrl', ['$scope', '$location', 'CommonProp', 'TemplateService', '$firebaseArray', '$firebaseObject', function($scope, $location, CommonProp, TemplateService, $firebaseArray, $firebaseObject){
+.controller('SendTemplateCtrl', ['$scope', '$http', '$location', 'CommonProp', 'TemplateService', '$firebaseArray', '$firebaseObject', function($scope, $http, $location, CommonProp, TemplateService, $firebaseArray, $firebaseObject){
     $scope.username = CommonProp.getUser();
     
     $scope.recipients = [];
@@ -32,8 +32,17 @@ angular.module('mailthemApp.sendTemplate', ['ngRoute'])
         console.log($scope.recipientsString);
     };
     
-    $scope.sendEmail =function(){
-        $location.path('/dashboard');
+    $scope.sendMail =function(){
+        console.log($scope.data.title);
+        $http.post('/sendmail', {
+            from: 'Mailthem <'+$scope.username+'>',
+            to: $scope.recipientsString,
+            subject: $scope.data.title,
+            text: $scope.data.content,
+            html: ""
+        }).then(res=>{
+            alert('Email sent successfully');
+        });
     };
     
 }]);
