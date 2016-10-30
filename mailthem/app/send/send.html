@@ -73,13 +73,13 @@
                     <form role="form" name="emailForm" novalidate="">
                         <div class="form-group" ng-class="{'has-error': emailForm.email.$invalid && emailForm.email.$touched}">
                             <input type="email" name="email" class="form-control" placeholder="Recipient email" ng-model="recipient">
-                            <small class="help-block" ng-show="emailForm.email.$invalid && emailForm.email.$touched">Please enter an Email Address</small>
+                            <small class="help-block" ng-show="emailForm.email.$invalid && emailForm.email.$touched && recipientError" >Please enter an Email Address</small>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-sm btn-success" ng-click="addRecipient()" data-dismiss="modal">Add</button>
-                    <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-sm btn-success" ng-click="addRecipient()">Add</button>
+                    <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>

@@ -35,7 +35,7 @@ angular.module('mailthemApp.dashboard', ['ngRoute', 'firebase'])
     $scope.updateTemplate = function(id){
         var ref = firebase.database().ref().child('templates/'+id);
         ref.update({
-            email: username,
+            email: $scope.username,
             title: $scope.editTemplateData.title,
             description: $scope.editTemplateData.description,
             content: $scope.editTemplateData.content
