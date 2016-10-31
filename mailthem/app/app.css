@@ -1,25 +1,28 @@
 /* app css stylesheet */
 
-.menu {
-  list-style: none;
-  border-bottom: 0.1em solid black;
-  margin-bottom: 2em;
-  padding: 0 0 0.5em;
+.well{
+    background: #d4d6d4;
 }
 
-.menu:before {
-  content: "[";
+.jumbotron{
+    background: #212121;
 }
 
-.menu:after {
-  content: "]";
+.jumbotron h2 {
+    color: white;
 }
 
-.menu > li {
-  display: inline;
+.navbar {
+    background-color: #212121;
 }
 
-.menu > li + li:before {
-  content: "|";
-  padding-right: 0.3em;
-}
+.navbar-inverse .navbar-nav > .active{
+    color: #ffffff;
+   background: #37722a;
+ }
+ .navbar-inverse .navbar-nav > .active > a, 
+ .navbar-inverse .navbar-nav > .active > a:hover, 
+ .navbar-inverse .navbar-nav > .active > a:focus {
+      color: #ffffff;
+      background: #37722a;
+ }

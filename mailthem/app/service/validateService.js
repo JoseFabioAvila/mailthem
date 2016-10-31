@@ -1,5 +1,6 @@
 'use strict';
 
+//Service that help with the validation of the emails
 angular.module('mailthemApp')
 .service('ValidateService', function(){
     

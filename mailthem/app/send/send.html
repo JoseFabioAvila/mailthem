@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>MailthemApp</title>
+    <title>MailthemApp Send</title>
 </head>
 <body ng-controller='SendTemplateCtrl'>
-
+    
+<!--navbar-->
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -13,26 +14,29 @@
         <ul class="nav navbar-nav">
             <li><a href="#/dashboard">Home</a></li>
             <li><a href="#/add_template">Add Template</a></li>
-            <li><a href="#">Logout</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li ng-click="logout()"><a href="#">Logout</a></li>
         </ul>
     </div>
 </nav>
-    
+
+<!--success-->  
 <div class="container" ng-show="success">
     <div class="row">
         <div class="alert alert-success">
-            <strong>Success!</strong> The template has been added.
+            <strong>Success!</strong> The template has been send successfully.
         </div>
     </div>
 </div>
     
+<!--Template Form-->
 <div class="container">
     <form role="form" name="templateForm" ng-submit="createTemplate()" novalidate="">
-        <legend>Send Template</legend>
         <div class="row">
             <div class="col-md-8">
                 <div class="form-group">
-                    <h4 for="title">Template From: {{username}}</h4>
+                    <h3 for="title">Template From: {{username}}</h3>
                 </div>
                 <div class="form-group" ng-class="{'has-error': templateForm.title.$invalid && templateForm.title.$touched}">
                     <label for="title">Template Title</label>
@@ -44,24 +48,26 @@
                     <textarea name="toList" class="form-control" placeholder="{{recipientsString}}" ng-model="recipientsTemplate" ng-minlength = 5 disabled>
                         
                     </textarea>
-                    <button type="button" class="btn btn-sm btn-primary btn-lg btn-block" data-target="#addRecipientsModal" data-toggle="modal">Add Recipients</button>
-                    <button type="button" class="btn btn-sm btn-primary btn-lg btn-block" >Add Recipients from CSV</button>
+                    <button type="button" class="btn btn-default btn-lg btn-block" data-target="#addRecipientsModal" data-toggle="modal">Add Recipients</button>
+                    <label>Select CSV File:</label> 
+                    <input class="btn btn-default btn-lg btn-block" id="csv" type="file">
+                    
                     <small class="help-block" ng-show="templateForm.title.$error.minlength && templateForm.title.$touched">Please enter a valid title for Template.</small>
                 </div>
                 <div class="form-group"  ng-class="{'has-error': templateForm.content.$invalid && templateForm.content.$touched}">
                     <label for="content">Template Content</label>
-                    <textarea id="temcontent" name="content" class="form-control" placeholder="Content" ng-model="data.content" required="" ng-minlength = 2></textarea>
+                    <textarea rows="12" id="temcontent" name="content" class="form-control" placeholder="Content" ng-model="data.content" required="" ng-minlength = 2></textarea>
                     <small class="help-block" ng-show="templateForm.content.$error.minlength && templateForm.content.$touched">Please enter a valid Content.</small>
                 </div>
                 <div class="form-group">
-                    <!--button type="button" class="btn btn-primary" ng-disabled="templateForm.$invalid">Save</button-->
-                    <button type="submit" class="btn btn-success btn-lg btn-block" ng-click="sendMail()" ng-disabled="templateForm.$invalid">Send</button>
+                    <button type="submit" class="btn btn-primary btn-lg btn-block" ng-click="sendMail()" ng-disabled="templateForm.$invalid">Send</button>
                 </div>
             </div>
         </div>
     </form>
 </div>
     
+<!--Add Recipients-->
 <div class="container">
     <div id="addRecipientsModal" class="modal fade" role="dialog">
         <div class="modal-dialog">

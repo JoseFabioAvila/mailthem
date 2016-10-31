@@ -9,6 +9,7 @@ angular.module('mailthemApp.sendTemplate', ['ngRoute'])
     });
 }])
 
+//Controller that send templates
 .controller('SendTemplateCtrl', ['$scope', '$http', '$location', 'CommonProp', 'TemplateService', 'ValidateService', '$firebaseArray', '$firebaseObject', function($scope, $http, $location, CommonProp, TemplateService, ValidateService, $firebaseArray, $firebaseObject){
     $scope.username = CommonProp.getUser();
     $scope.recipientError = false;
@@ -17,22 +18,30 @@ angular.module('mailthemApp.sendTemplate', ['ngRoute'])
     $scope.recipient ="";
     $scope.recipientsString = "";
     
+    //get the template from firebase
     var id = TemplateService.getTemplateId();
     var ref = firebase.database().ref().child('templates/'+id);
     $scope.data = $firebaseObject(ref);
     
+    //if user not logged, redirect to login page
     if(!$scope.username){
         $location.path('/login');
     }
     
+    //Add recipient
     $scope.addRecipient = function(){
         $scope.recipientError = false;
         if(ValidateService.validate($scope.recipient)){
-            $scope.recipients.push($scope.recipient);
+            /*$scope.recipients.push($scope.recipient);
             $scope.recipient = "";
             $scope.recipientsString = $scope.recipients.toString();
 
-            console.log($scope.recipientsString);
+            console.log($scope.recipientsString);*/
+            if($scope.recipientsString == ""){
+                $scope.recipientsString = $scope.recipient;
+            } else {
+                $scope.recipientsString = $scope.recipientsString+","+$scope.recipient;
+            }
         }
         else{
             $scope.recipientError = true;
@@ -40,6 +49,7 @@ angular.module('mailthemApp.sendTemplate', ['ngRoute'])
         }
     };
     
+    //Send mail to recipients
     $scope.sendMail =function(){
         console.log($scope.data.title);
         $http.post('/sendmail', {
@@ -49,23 +59,46 @@ angular.module('mailthemApp.sendTemplate', ['ngRoute'])
             text: $scope.data.content,
             html: ""
         }).then(res=>{
-            alert('Email sent successfully');
+            $scope.success = true;
+            //desabilitar boton de salvar template
+            window.setTimeout(function(){
+                $scope.$apply(function(){
+                    $scope.success = false;
+                    $location.path('/dashboard');
+                });
+            }, 2000);
         });
     };
     
-    $scope.updateTemplate = function(){
-        var ref = firebase.database().ref().child('templates/'+id);
-        ref.update({
-            email: $scope.username,
-            title: $scope.editTemplateData.title,
-            description: $scope.editTemplateData.description,
-            content: $scope.editTemplateData.content
-        }).then(function(ref){
-            $location.path('/dashboard');
-        },function(error){
-            console.log(error); 
-            $location.path('/send');
-        });
+    //Read CSV file for add the recipients
+    var fileInput = document.getElementById("csv"), readFile = function () {
+        try{
+            var reader = new FileReader();
+            reader.onload = function () {
+                //document.getElementById('out').innerHTML = reader.result.split(',');
+                var res = "";
+                if($scope.recipientsString == ""){
+                    res = reader.result.toString();
+                } else {
+                    res = $scope.recipientsString+","+reader.result.toString();
+                }
+                setTimeout(function(){
+                    $scope.$apply(function(){
+                        $scope.recipientsString = res;
+                    });
+                },1000);
+            };
+            // start reading the file. When it is done, calls the onload event defined above.
+            reader.readAsBinaryString(fileInput.files[0]);
+        } catch(error){
+            console.log("error al cargar el archivo.");
+        }
+    };
+    fileInput.addEventListener('change', readFile);
+    
+    //logout 
+    $scope.logout = function(){
+        CommonProp.logoutUser();
     };
     
 }]);

@@ -1,5 +1,6 @@
 'use strict';
 
+//Service that help with sending mail, this service have the id of template to be send
 angular.module('mailthemApp')
 .service('TemplateService', function(){
     var id = "";

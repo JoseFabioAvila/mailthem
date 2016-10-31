@@ -9,6 +9,7 @@ angular.module('mailthemApp.login',['ngRoute','firebase'])
     });
 }])
 
+//Controller for login
 .controller('LoginCtrl', ['$scope', '$firebaseAuth','$location', 'CommonProp', function($scope, $firebaseAuth, $location, CommonProp){
     
     $scope.username = CommonProp.getUser();
@@ -17,6 +18,7 @@ angular.module('mailthemApp.login',['ngRoute','firebase'])
         $location.path('/login');
     }
     
+    //User login
     $scope.signIn = function(){
         var username = $scope.user.email;
         var password = $scope.user.password;
@@ -33,6 +35,10 @@ angular.module('mailthemApp.login',['ngRoute','firebase'])
         });
     };
     
+    //User logout
+    $scope.logout = function(){
+        CommonProp.logoutUser();
+    };
     
 }]);
 

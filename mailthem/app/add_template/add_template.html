@@ -5,6 +5,7 @@
 </head>
 <body ng-controller='AddTemplateCtrl'>
 
+<!--navbar-->
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -13,11 +14,14 @@
         <ul class="nav navbar-nav">
             <li><a href="#/dashboard">Home</a></li>
             <li class="active"><a href="#/add_template">Add Template</a></li>
-            <li><a href="#">Logout</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li ng-click="logout()"><a href="#">Logout</a></li>
         </ul>
     </div>
 </nav>
     
+<!--success-->
 <div class="container" ng-show="success">
     <div class="row">
         <div class="alert alert-success">
@@ -26,6 +30,7 @@
     </div>
 </div>
     
+<!--Create Form Template-->
 <div class="container">
     <form role="form" name="templateForm" ng-submit="createTemplate()" novalidate="">
         <legend>Create Template</legend>
@@ -43,11 +48,11 @@
                 </div>
                 <div class="form-group"  ng-class="{'has-error': templateForm.content.$invalid && templateForm.content.$touched}">
                     <label for="content">Template Content</label>
-                    <textarea name="content" class="form-control" placeholder="Content" ng-model="template.content" required="" ng-minlength = 2></textarea>
+                    <textarea rows="12" name="content" class="form-control" placeholder="Content" ng-model="template.content" required="" ng-minlength = 2></textarea>
                     <small class="help-block" ng-show="templateForm.content.$error.minlength && templateForm.content.$touched">Please enter a valid Content.</small>
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary" ng-disabled="templateForm.$invalid">Save</button>
+                    <button type="submit" class="btn btn-default" ng-disabled="templateForm.$invalid">Save</button>
                 </div>
             </div>
         </div>

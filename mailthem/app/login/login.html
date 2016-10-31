@@ -5,9 +5,9 @@
 </head>
 <body ng-controller="LoginCtrl">
     
-<div class="container">
-    <div class="jumbotron col-md-6 col-md-offset-3" style="padding-top: 0; padding-botton: 0;">
-        <h2>Mailthem Login</h2>
+<div class="container" style="padding-top: 8%;">
+    <div class="jumbotron col-md-6 col-md-offset-3" style="padding-top: 20; padding-botton: 0;">
+        <h2 style="text-align: center;">Mailthem Login</h2>
     </div>
     <form role="form" name="loginForm" novalidate="">
         <div class="form-group col-md-6 col-md-offset-3" ng-class="{'has-error': loginForm.email.$invalid && loginForm.email.$touched}">
@@ -25,7 +25,7 @@
         </div>
         <div class="form-group col-md-6 col-md-offset-3">
             <p ng-show="errMsg" style="color: red;">{{errorMessage}}</p>
-            <button type="submit" class="btn btn-lg btn-primary btn-block" ng-disabled="loginForm.$invalid" ng-click="signIn()">Sign In</button>
+            <button type="submit" class="btn btn-lg btn-default btn-block" ng-disabled="loginForm.$invalid" ng-click="signIn()">Sign In</button>
         </div>
     </form>
 </div>

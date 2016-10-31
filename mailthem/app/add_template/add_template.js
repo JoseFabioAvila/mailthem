@@ -9,16 +9,20 @@ angular.module('mailthemApp.add_template', ['ngRoute', 'firebase'])
     });
 }])
 
+//controller for add new template
 .controller('AddTemplateCtrl', ['$scope', '$firebaseArray', '$location', 'CommonProp', function($scope, $firebaseArray, $location, CommonProp){
     $scope.username = CommonProp.getUser();
     
+    //if user not logged, redirect to login page
     if(!$scope.username){
         $location.path('/login');
     }
     
+    //get the firebase array to add the new template
     var ref = firebase.database().ref().child('templates');
     $scope.templates = $firebaseArray(ref);
     
+    //create the new template.
     $scope.createTemplate = function(){
         var title = $scope.template.title;
         var description = $scope.template.description;
@@ -45,6 +49,11 @@ angular.module('mailthemApp.add_template', ['ngRoute', 'firebase'])
         }, function(error){
             console.log(error);
         });
+    };
+    
+    //logout 
+    $scope.logout = function(){
+        CommonProp.logoutUser();
     };
     
 }]);

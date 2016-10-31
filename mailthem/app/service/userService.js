@@ -1,5 +1,6 @@
 'use strict';
 
+//Service that help with the auth of the users
 angular.module('mailthemApp')
 .service('CommonProp', ['$location', '$firebaseAuth', function($location, $firebaseAuth){
     var user = "";

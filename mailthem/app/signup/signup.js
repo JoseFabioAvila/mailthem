@@ -8,13 +8,12 @@ angular.module('mailthemApp.signup',['ngRoute', 'firebase'])
         controller: 'SignupCtrl'
     });
 }])
-
+//Signup Controller
 .controller('SignupCtrl', ['$scope', '$firebaseAuth', '$firebaseArray', 'CommonProp', '$location', function($scope, $firebaseAuth, $firebaseArray, CommonProp, $location){
     
-
     var username = CommonProp.getUser();
     
-    
+    //Register the user in firebase
     $scope.signUp = function(){
         //$scope.errMsg = false;
         var username = $scope.user.email;
@@ -32,11 +31,10 @@ angular.module('mailthemApp.signup',['ngRoute', 'firebase'])
         }
     };
     
+    //create the example template for the firs login
     var createUserArray = function(username, password){
         
-        
-        
-        //sign in
+        //signin first
         var auth = $firebaseAuth();
         auth.$signInWithEmailAndPassword(username, password).then(function(){
             CommonProp.setUser(username);
@@ -45,9 +43,7 @@ angular.module('mailthemApp.signup',['ngRoute', 'firebase'])
             $scope.errorMessage = error.message;
         }); 
         
-        
-        
-        //create
+        //create template
         var ref = firebase.database().ref().child('templates');
         $scope.templates = $firebaseArray(ref);
         $scope.templates.$add({
@@ -57,15 +53,12 @@ angular.module('mailthemApp.signup',['ngRoute', 'firebase'])
             content: "<h1>Content of template.</h1>"
         }).then(function(ref){
             console.log("User Array Successfully Created");
-            logout();
+            
+            //For finish, logout the user
+            CommonProp.logoutUser();  
         }, function(error){
             console.log(error);
         });
-    };
-    
-    
-    var logout = function(){
-        CommonProp.logoutUser();
     };
     
 }]);
