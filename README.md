@@ -1,4 +1,4 @@
-# mailthem
+# Mailthem
 
 Web application to allow user to send email marketing content. 
 
