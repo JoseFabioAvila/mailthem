@@ -32,11 +32,6 @@ angular.module('mailthemApp.sendTemplate', ['ngRoute'])
     $scope.addRecipient = function(){
         $scope.recipientError = false;
         if(ValidateService.validate($scope.recipient)){
-            /*$scope.recipients.push($scope.recipient);
-            $scope.recipient = "";
-            $scope.recipientsString = $scope.recipients.toString();
-
-            console.log($scope.recipientsString);*/
             if($scope.recipientsString == ""){
                 $scope.recipientsString = $scope.recipient;
             } else {
@@ -51,7 +46,6 @@ angular.module('mailthemApp.sendTemplate', ['ngRoute'])
     
     //Send mail to recipients
     $scope.sendMail =function(){
-        console.log($scope.data.title);
         $http.post('/sendmail', {
             from: 'Mailthem <'+$scope.username+'>',
             to: $scope.recipientsString,
@@ -91,7 +85,7 @@ angular.module('mailthemApp.sendTemplate', ['ngRoute'])
             // start reading the file. When it is done, calls the onload event defined above.
             reader.readAsBinaryString(fileInput.files[0]);
         } catch(error){
-            console.log("error al cargar el archivo.");
+            alert("error al cargar el archivo.");
         }
     };
     fileInput.addEventListener('change', readFile);

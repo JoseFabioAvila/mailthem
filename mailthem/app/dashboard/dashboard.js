@@ -26,7 +26,6 @@ angular.module('mailthemApp.dashboard', ['ngRoute', 'firebase'])
     $scope.editTemplate = function(id){
         var ref = firebase.database().ref().child('templates/'+id);
         $scope.editTemplateData = $firebaseObject(ref);
-        console.log($scope.editTemplateData);
     };
     
     //edit the template with the given id

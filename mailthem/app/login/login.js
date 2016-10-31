@@ -25,11 +25,9 @@ angular.module('mailthemApp.login',['ngRoute','firebase'])
         var auth = $firebaseAuth();
 
         auth.$signInWithEmailAndPassword(username, password).then(function(){
-            console.log("User Login Successful");
             CommonProp.setUser($scope.user.email);
             $location.path('/dashboard');
         }).catch(function(error){
-            //console.log(error);
             $scope.errMsg = true;
             $scope.errorMessage = error.message;
         });

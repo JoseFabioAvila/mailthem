@@ -29,7 +29,6 @@ angular.module('mailthemApp.add_template', ['ngRoute', 'firebase'])
         var content = $scope.template.content;
         var username = $scope.username;
         
-        console.log($scope.templates);
         
         $scope.templates.$add({
             email: username,
@@ -37,7 +36,6 @@ angular.module('mailthemApp.add_template', ['ngRoute', 'firebase'])
             description: description,
             content: content
         }).then(function(ref){
-            console.log(ref);
             $scope.success = true;
             //desabilitar boton de salvar template
             window.setTimeout(function(){

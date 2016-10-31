@@ -22,7 +22,6 @@ angular.module('mailthemApp.signup',['ngRoute', 'firebase'])
         if(username && password){
             var auth = $firebaseAuth();
             auth.$createUserWithEmailAndPassword(username, password).then(function(){
-                console.log("User Successfully Created");
                 createUserArray(username,password);
             }).catch(function(error){
                $scope.errMsg = true;
@@ -50,9 +49,9 @@ angular.module('mailthemApp.signup',['ngRoute', 'firebase'])
             email: username,
             title: "Title of template.",
             description: "Description of template.",
-            content: "<h1>Content of template.</h1>"
+            content: "Content of template."
         }).then(function(ref){
-            console.log("User Array Successfully Created");
+            //console.log("User Array Successfully Created");
             
             //For finish, logout the user
             CommonProp.logoutUser();  

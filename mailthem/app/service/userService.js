@@ -19,7 +19,6 @@ angular.module('mailthemApp')
         },
         logoutUser: function(){
             auth.$signOut();
-            console.log("Logged Out Succesfully");
             user = "";
             localStorage.removeItem('userEmail');
             $location.path('/login');
