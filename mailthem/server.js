@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.post('/sendmail', function(req, res){
     var options = {
         auth: {
-            api_key: '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'
+            api_key: 'Your SendGrid API KEY'
         }
     }
     var mailer = nodemailer.createTransport(sgTransport(options));
